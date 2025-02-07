@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "VT323", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#input-container{
+ display: flex;
+ gap: 10px;
+}
+
+#input-container input{
+  margin-top: 40px;
+  width: 20px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid white;
+  gap: 10px;
+}
