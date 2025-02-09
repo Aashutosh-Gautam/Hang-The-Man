@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-body{
+body {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -18,16 +18,39 @@ body{
   font-style: normal;
 }
 
-#input-container{
- display: flex;
- gap: 10px;
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
-#input-container input{
+#input-container {
+  display: flex;
+  gap: 10px;
+}
+
+#input-container input {
   margin-top: 40px;
   width: 20px;
   border: none;
   outline: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid black;
   gap: 10px;
+}
+
+#buttons {
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button {
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+  background-color: red;
+  border: none;
+  border-radius: 6px;
 }
