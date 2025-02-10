@@ -1,9 +1,29 @@
 let inputContainer = document.getElementById("input-container");
 let buttonContainer = document.getElementById("buttons");
+let attempt = document.getElementById('attempt');
 
-let word = "Disappear";
+
+const words = [
+    "apple", "ocean", "mountain", "galaxy", "whisper", "thunder", "journey", "puzzle", "luminous", "harmony",
+    "forest", "serene", "crystal", "adventure", "twilight", "spectrum", "phantom", "cascade", "solstice", "epic",
+    "ripple", "nebula", "vortex", "mirage", "echo", "zenith", "horizon", "mystic", "enigma", "arcane",
+    "labyrinth", "radiance", "ember", "illusion", "tranquil", "velocity", "crescent", "stellar", "shimmer", "oracle",
+    "eclipse", "resonance", "whimsical", "fable", "gravity", "spectral", "paradox", "infinity", "glimpse", "timeless"
+  ];
+
+  let wordIndex=  Math.floor((Math.random() * words.length) + 1);
+let word = words[wordIndex];
 let wordArray = [];
 let inputFields = [];
+let correctAnswer = [];
+let attemptLeft = 10;
+
+attempt.textContent = attemptLeft;
+
+
+let correctSound = new Audio('./assets/correct.mp3');
+let wrongSound = new Audio('./assets/wrong.mp3');
+let winSound = new Audio("./assets/win.mp3");
 
 
 let characters =
@@ -31,18 +51,31 @@ characters.forEach((character, index) => {
     characterButton.classList = "button";
     buttonContainer.appendChild(characterButton);
 
-    characterButton.addEventListener("click", function (e) {
-        let selectedCharacter = e.target.textContent;
-
-        wordArray.forEach((element, indexAt) => {
-            if (selectedCharacter === wordArray[indexAt]) {
-                inputFields[indexAt].value = selectedCharacter;
-            }
-            else {
-                console.log(e);
-            }
+        characterButton.addEventListener("click", function (e) {
+            let selectedCharacter = e.target.textContent;
+            let isCorrect = false;
+            wordArray.forEach((element, indexAt) => {
+                if (selectedCharacter === wordArray[indexAt]) {
+                    correctAnswer.push(selectedCharacter);
+                    inputFields[indexAt].value = selectedCharacter;
+                    isCorrect = true;
+                }
+            });
+    
+            checkForWin();
+            e.target.disabled = true;
+            e.target.classList ="disable";
+            attemptLeft -= 1;
+            attempt.textContent = attemptLeft;
+            isCorrect ? correctSound.play() : wrongSound.play();
+            console.log(attemptLeft);
+        
         });
-    })
 })
-
+function checkForWin(){
+    
+if(correctAnswer.length === word.length){
+    winSound.play();   
+}
+}
 
