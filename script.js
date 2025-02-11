@@ -9,9 +9,9 @@ const words = [
     "ripple", "nebula", "vortex", "mirage", "echo", "zenith", "horizon", "mystic", "enigma", "arcane",
     "labyrinth", "radiance", "ember", "illusion", "tranquil", "velocity", "crescent", "stellar", "shimmer", "oracle",
     "eclipse", "resonance", "whimsical", "fable", "gravity", "spectral", "paradox", "infinity", "glimpse", "timeless"
-  ];
+];
 
-  let wordIndex=  Math.floor((Math.random() * words.length) + 1);
+let wordIndex = Math.floor((Math.random() * words.length) + 1);
 let word = words[wordIndex];
 let wordArray = [];
 let inputFields = [];
@@ -51,31 +51,54 @@ characters.forEach((character, index) => {
     characterButton.classList = "button";
     buttonContainer.appendChild(characterButton);
 
-        characterButton.addEventListener("click", function (e) {
-            let selectedCharacter = e.target.textContent;
-            let isCorrect = false;
-            wordArray.forEach((element, indexAt) => {
-                if (selectedCharacter === wordArray[indexAt]) {
-                    correctAnswer.push(selectedCharacter);
-                    inputFields[indexAt].value = selectedCharacter;
-                    isCorrect = true;
-                }
-            });
-    
-            checkForWin();
-            e.target.disabled = true;
-            e.target.classList ="disable";
-            attemptLeft -= 1;
-            attempt.textContent = attemptLeft;
-            isCorrect ? correctSound.play() : wrongSound.play();
-            console.log(attemptLeft);
-        
+    characterButton.addEventListener("click", function (e) {
+
+        if (attemptLeft <= 0) return;
+
+        let selectedCharacter = e.target.textContent;
+        let isCorrect = false;
+        let isFound = false;
+        wordArray.forEach((element, indexAt) => {
+            if (selectedCharacter === wordArray[indexAt]) {
+                correctAnswer.push(selectedCharacter);
+                inputFields[indexAt].value = selectedCharacter;
+                isCorrect = true;
+                isFound = true;
+            }
         });
-})
-function checkForWin(){
-    
-if(correctAnswer.length === word.length){
-    winSound.play();   
+
+
+        if (!isFound) {
+            attemptLeft -= 1;
+        }
+
+        if (attemptLeft === 0) {
+            disableAllButton();
+        }
+        checkForWin();
+        e.target.disabled = true;
+        e.target.classList = "disable";
+        attempt.textContent = attemptLeft;
+        isCorrect ? correctSound.play() : wrongSound.play();
+        console.log(attemptLeft);
+
+    });
+});
+
+function checkForWin() {
+
+    if (correctAnswer.length === word.length) {
+        winSound.play();
+    }
 }
+
+
+function disableAllButton() {
+    let buttons = document.querySelectorAll(".button");
+
+    buttons.forEach((button) => {
+        button.disabled = true;
+        button.classList = "disable";
+    });
 }
 
