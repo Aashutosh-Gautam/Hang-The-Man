@@ -54,3 +54,12 @@ body {
   border: none;
   border-radius: 6px;
 }
+
+.disable{
+  height: 40px;
+  width: 40px;
+  margin: 10px;
+  background-color: rgb(217, 217, 217);
+  border: none;
+  border-radius: 6px;
+}
